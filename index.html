@@ -166,7 +166,7 @@
 					<div class="about">
 						<i class="fa fa-comments"></i>
 						<h3>技术支持   效率倍增</h3>
-						<p>为您提供原产地集中采购、品类丰富的优质货源宝贝，近万款热销SKU任您挑选，保税、直邮、国内贸易、大货应有尽有。零库存积压，支持一件代发</p>
+						<p>专业的强大IT 技术团队，提供24小时技术支持，我们的软件支持手机端、PC端、小程序端的线上线下商城系统，为您的营销赋能</p>
 						<!-- <a href="#">Read more</a> -->
 					</div>
 				</div>
@@ -177,7 +177,7 @@
 					<div class="about">
 						<i class="fa fa-magnet"></i>
 						<h3>热销精选   品类丰富</h3>
-						<p>流连布局香港、广州、云南、郑州、重庆、杭州等自建海外仓、保税仓以及多个公共保税仓储网络，拥有24小时快速仓储打包、分拣、报关、仓配物流等系列高效服务</p>
+						<p>为您提供原产地集中采购、品类丰富的优质货源宝贝，近万款热销SKU任您挑选，保税、直邮、国内贸易、大货应有尽有。零库存积压，支持一件代发</p>
 						<!-- <a href="#">Read more</a> -->
 					</div>
 				</div>
@@ -333,7 +333,7 @@
 	</div>
 	<!-- /Why Choose Us -->
 <!-- Numbers -->
-	<div id="" class="section sm-padding">
+	<div id="" class="section sm-padding nummm">
 
 		<!-- Background Image -->
 		<div class="bg-img" style="background-image: url('./img/background2.jpg');">
@@ -353,7 +353,8 @@
 				<div class="col-md-4 col-xs-8">
 					<div class="number">
 						<!-- <i class="fa fa-trophy"></i> -->
-						<h3 class="white-text"><span class="counter">10-50%</span></h3>
+						<!-- <h3 class="white-text"><span class="counter">10-50%</span></h3> -->
+						<h3 class="white-text "><span class="counter timer count-title" id="count-number" data-to="10" data-speed="1000"></span><span class="counter">%~</span><span class="counter timer count-title" id="count-number" data-to="50" data-speed="500"></span><span class="counter">%</span></h3>
 						<span class="white-text">降低采购成本</span>
 					</div>
 				</div>
@@ -363,7 +364,8 @@
 				<div class="col-md-4 col-xs-8">
 					<div class="number">
 						<!-- <i class="fa fa-coffee"></i> -->
-						<h3 class="white-text"><span class="counter">99.9%</span></h3>
+						<!-- <h3 class="white-text"><span class="counter">99.9%</span></h3> -->
+						<h3 class="white-text "><span class="counter timer count-title" id="count-number" data-to="99.9" data-speed="1000"></span><span class="counter">%</span></h3>
 						<span class="white-text">复采率</span>
 					</div>
 				</div>
@@ -373,7 +375,8 @@
 				<div class="col-md-4 col-xs-8">
 					<div class="number">
 						<!-- <i class="fa fa-file"></i> -->
-						<h3 class="white-text"><span class="counter">30000+</span></h3>
+						<!-- <h3 class="white-text "><span class="counter">30000+</span></h3> -->
+						<h3 class="white-text "><span class="counter timer count-title" id="count-number" data-to="30000" data-speed="1000"></span><span class="counter">+</span></h3>
 						<span class="white-text">品牌</span>
 					</div>
 				</div>
@@ -588,10 +591,10 @@
 
 					<!-- footer copyright -->
 					<div class="footer-copyright" style="color: #fff">
-						<p>联系方式：（86）0411-8813 5549 / 133 3227 7736 朴经理</p>
-						<p>邮箱：b2b@llwell.net</p>
+						<p>联系方式：（86）0411-8813 5549</p>
+						<p>邮箱：market@llwell.net</p>
 						<p>地址： 辽宁省大连市中山区五五路港湾中心2213A</p>
-						<p>Copyright © 2017-2018 岂止科技(大连)有限公司 All Rights Reserved</p>
+						<p>辽ICP备15018646号-4</p>
 					</div>
 					<!-- /footer copyright -->
 
@@ -627,7 +630,106 @@
 	<script type="text/javascript" src="js/owl.carousel.min.js"></script>
 	<script type="text/javascript" src="js/jquery.magnific-popup.js"></script>
 	<script type="text/javascript" src="js/main.js"></script>
+	<script type="text/javascript" src="js/count.js"></script>
+<script type="text/javascript">
+	//窗口显示才加载
+	var wrapTop = $(".nummm").offset().top;
+	var istrue = true;
+	$(window).on("scroll",
+	function() {
+	    var s = $(window).scrollTop();
+	    if (s > wrapTop - 500 && istrue) {
+	        $(".timer").each(count);
+	        function count(a) {
+	            var b = $(this);
+	            a = $.extend({},
+	            a || {},
+	            b.data("countToOptions") || {});
+	            b.countTo(a)
+	        };
+	        istrue = false;
+	    };
+	})
+	//设置计数
+	$.fn.countTo = function (options) {
+		options = options || {};
+		return $(this).each(function () {
+			//当前元素的选项
+			var settings = $.extend({}, $.fn.countTo.defaults, {
+				from:            $(this).data('from'),
+				to:              $(this).data('to'),
+				speed:           $(this).data('speed'),
+				refreshInterval: $(this).data('refresh-interval'),
+				decimals:        $(this).data('decimals')
+			}, options);
+			//更新值
+			var loops = Math.ceil(settings.speed / settings.refreshInterval),
+			    increment = (settings.to - settings.from) / loops;
+			//更改应用和变量
+			var self = this,
+			$self = $(this),
+			loopCount = 0,
+			value = settings.from,
+			data = $self.data('countTo') || {};
+			$self.data('countTo', data);
+			//如果有间断，找到并清除
+			if (data.interval) {
+				clearInterval(data.interval);
+			};
+			data.interval = setInterval(updateTimer, settings.refreshInterval);
+			//初始化起始值
+			render(value);
+			function updateTimer() {
+				value += increment;
+				loopCount++;
+				render(value);
+				if (typeof(settings.onUpdate) == 'function') {
+					settings.onUpdate.call(self, value);
+				}
+				if (loopCount >= loops) {
+					//移出间隔
+					$self.removeData('countTo');
+					clearInterval(data.interval);
+					value = settings.to;
+					if (typeof(settings.onComplete) == 'function') {
+						settings.onComplete.call(self, value);
+					}
+				}
+			}
+			function render(value) {
+				var formattedValue = settings.formatter.call(self, value, settings);
+				$self.html(formattedValue);
+			}
+			});
+        };
+        $.fn.countTo.defaults={
+        	from:0,               //数字开始的值
+        	to:0,                 //数字结束的值
+        	speed:1000,           //设置步长的时间
+        	refreshInterval:100,  //隔间值
+        	decimals:0,           //显示小位数
+        	formatter: formatter, //渲染之前格式化
+        	onUpdate:null,        //每次更新前的回调方法
+        	onComplete:null       //完成更新的回调方法
+        };
+        function formatter(value, settings){
+        	return value.toFixed(settings.decimals);
+        }
+        //自定义格式
+        $('#count-number').data('countToOptions',{
+        	formmatter:function(value, options){
+        		return value.toFixed(options.decimals).replace(/\B(?=(?:\d{3})+(?!\d))/g, ',');
+        	}
+        });
+        //定时器
+        $('.timer').each(count);
+        function count(options){
+        	var $this=$(this);
+        	options=$.extend({}, options||{}, $this.data('countToOptions')||{});
+        	$this.countTo(options);
+        }
 
+	</script>
 </body>
 
 </html>
